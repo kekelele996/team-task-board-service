@@ -60,7 +60,7 @@ func (r *notificationRepo) MarkAllRead(userID uint) error {
 
 func (r *notificationRepo) UnreadCount(userID uint) (int64, error) {
 	var count int64
-	if err := r.db.Model(&model.Notification{}).Where("is_read = ?", false).Count(&count).Error; err != nil {
+	if err := r.db.Model(&model.Notification{}).Where("user_id = ? AND is_read = ?", userID, false).Count(&count).Error; err != nil {
 		return 0, fmt.Errorf("count unread notifications: %w", err)
 	}
 	return count, nil
