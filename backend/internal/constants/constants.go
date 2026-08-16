@@ -36,8 +36,9 @@ const (
 	NotifyMemberInvited = "member_invited"
 )
 
-// Default board columns
-var DefaultColumns = []string{"Done", "In Progress", "To Do"}
+// Default board columns. Order is significant: it drives the left-to-right
+// layout when a board is created (To Do, In Progress, Done).
+var DefaultColumns = []string{"To Do", "In Progress", "Done"}
 
 // Pagination defaults
 const (
