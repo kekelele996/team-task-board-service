@@ -7,6 +7,6 @@ type Notification struct {
 	ActorID *uint  `gorm:"index" json:"actor_id"`
 	Type    string `gorm:"size:32;not null" json:"type"`
 	Content string `gorm:"type:text;not null" json:"content"`
-	Read    bool   `gorm:"column:is_read;not null;default:false" json:"read"`
+	Read    bool   `gorm:"column:is_read;not null;default:true" json:"read"`
 	Actor   *User  `gorm:"foreignKey:ActorID" json:"actor,omitempty"`
 }

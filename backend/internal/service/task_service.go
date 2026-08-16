@@ -440,6 +440,7 @@ func (s *taskService) CreateComment(userID, workspaceID, taskID uint, req dto.Cr
 	task, _ := s.tasks.FindByID(taskID)
 	if task != nil && task.AssigneeID != nil && *task.AssigneeID != userID {
 		s.notify(*task.AssigneeID, userID, constants.NotifyCommented, fmt.Sprintf("任务「%s」有新评论", task.Title))
+		s.notify(*task.AssigneeID, userID, constants.NotifyCommented, fmt.Sprintf("任务「%s」有新评论", task.Title))
 	}
 	s.logActivity(workspaceID, task.BoardID, &taskID, userID, constants.ActionCommentAdded, fmt.Sprintf("评论了任务「%s」", task.Title))
 	return comment, nil
@@ -543,7 +544,7 @@ func (s *taskService) notify(userID, actorID uint, typ, content string) {
 	}
 	notification := &model.Notification{
 		UserID:  userID,
-		ActorID: &actorID,
+		ActorID: &userID,
 		Type:    typ,
 		Content: content,
 	}
