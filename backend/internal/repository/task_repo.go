@@ -126,7 +126,7 @@ func (r *taskRepo) ListByBoard(boardID uint, filter TaskFilter) ([]model.Task, e
 		q = q.Where("tasks.title LIKE ? OR tasks.description LIKE ?", like, like)
 	}
 	var tasks []model.Task
-	if err := q.Preload("Assignee").Preload("Tags").Order("tasks.id ASC").Find(&tasks).Error; err != nil {
+	if err := q.Preload("Assignee").Preload("Tags").Order("tasks.position ASC, tasks.id ASC").Find(&tasks).Error; err != nil {
 		return nil, fmt.Errorf("list tasks: %w", err)
 	}
 	return tasks, nil
@@ -165,7 +165,7 @@ func (r *taskRepo) MaxPosition(boardID, columnID uint) (int, error) {
 	var max int
 	err := r.db.Model(&model.Task{}).
 		Where("board_id = ? AND column_id = ?", boardID, columnID).
-		Select("COALESCE(MAX(position), 0)").Scan(&max).Error
+		Select("COALESCE(MAX(position), -1)").Scan(&max).Error
 	if err != nil {
 		return 0, fmt.Errorf("max task position: %w", err)
 	}

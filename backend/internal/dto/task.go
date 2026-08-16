@@ -26,7 +26,7 @@ type UpdateTaskRequest struct {
 // MoveTaskRequest updates column and position for drag-and-drop.
 type MoveTaskRequest struct {
 	ColumnID uint   `json:"column_id" validate:"required"`
-	Position int    `json:"position"`
+	Position int    `json:"position" validate:"gte=0"`
 	TaskIDs  []uint `json:"task_ids" validate:"omitempty"`
 }
 
