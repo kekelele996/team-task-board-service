@@ -47,7 +47,7 @@ func (r *columnRepo) FindByID(id uint) (*model.BoardColumn, error) {
 
 func (r *columnRepo) ListByBoard(boardID uint) ([]model.BoardColumn, error) {
 	var columns []model.BoardColumn
-	if err := r.db.Where("board_id = ?", boardID).Order("position DESC").Find(&columns).Error; err != nil {
+	if err := r.db.Where("board_id = ?", boardID).Order("position ASC").Find(&columns).Error; err != nil {
 		return nil, fmt.Errorf("list columns: %w", err)
 	}
 	return columns, nil
