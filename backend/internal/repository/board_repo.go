@@ -37,7 +37,7 @@ func (r *boardRepo) FindByID(id uint) (*model.Board, error) {
 	var board model.Board
 	if err := r.db.Preload("Columns").First(&board, id).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, nil
+			return nil, fmt.Errorf("find board %d: %w", id, ErrNotFound)
 		}
 		return nil, fmt.Errorf("find board %d: %w", id, err)
 	}

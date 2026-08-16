@@ -67,6 +67,9 @@ func (s *boardService) Get(userID, workspaceID, boardID uint) (*model.Board, err
 	if err != nil {
 		return nil, err
 	}
+	if board == nil {
+		return nil, repository.ErrNotFound
+	}
 	if board.WorkspaceID != workspaceID {
 		return nil, repository.ErrNotFound
 	}

@@ -106,6 +106,9 @@ func (s *taskService) taskWorkspaceID(taskID uint) (uint, error) {
 	if err != nil {
 		return 0, err
 	}
+	if task == nil {
+		return 0, repository.ErrNotFound
+	}
 	board, err := s.boards.FindByID(task.BoardID)
 	if err != nil {
 		return 0, err
