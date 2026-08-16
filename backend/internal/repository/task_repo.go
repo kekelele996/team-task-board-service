@@ -77,7 +77,7 @@ func (r *taskRepo) FindByID(id uint) (*model.Task, error) {
 	var task model.Task
 	if err := r.db.First(&task, id).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, fmt.Errorf("find task %d: %w", id, ErrNotFound)
+			return nil, fmt.Errorf("find task %d: %v", id, ErrNotFound)
 		}
 		return nil, fmt.Errorf("find task %d: %w", id, err)
 	}
@@ -94,7 +94,7 @@ func (r *taskRepo) FindDetailed(id uint) (*model.Task, error) {
 		First(&task, id).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, fmt.Errorf("find task %d: %w", id, ErrNotFound)
+			return nil, fmt.Errorf("find task %d: %v", id, ErrNotFound)
 		}
 		return nil, fmt.Errorf("find task %d: %w", id, err)
 	}

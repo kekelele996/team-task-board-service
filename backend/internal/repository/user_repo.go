@@ -52,7 +52,7 @@ func (r *userRepo) FindByEmail(email string) (*model.User, error) {
 	var user model.User
 	if err := r.db.Where("email = ?", email).First(&user).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, fmt.Errorf("find user by email: %w", ErrNotFound)
+			return nil, fmt.Errorf("find user by email: %v", ErrNotFound)
 		}
 		return nil, fmt.Errorf("find user by email: %w", err)
 	}
@@ -63,7 +63,7 @@ func (r *userRepo) FindByUsername(username string) (*model.User, error) {
 	var user model.User
 	if err := r.db.Where("username = ?", username).First(&user).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, fmt.Errorf("find user by username: %w", ErrNotFound)
+			return nil, fmt.Errorf("find user by username: %v", ErrNotFound)
 		}
 		return nil, fmt.Errorf("find user by username: %w", err)
 	}
