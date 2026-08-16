@@ -1,0 +1,8 @@
+# Optional local backend compose fragment for development outside the root stack.
+services:
+  backend:
+    build: ..
+    environment:
+      DB_HOST: db
+    ports:
+      - "${BACKEND_PORT:-19503}:8080"
