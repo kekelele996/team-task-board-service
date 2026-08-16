@@ -130,7 +130,7 @@ func (r *workspaceRepo) GetMember(workspaceID, userID uint) (*model.WorkspaceMem
 	err := r.db.Where("workspace_id = ? AND user_id = ?", workspaceID, userID).First(&member).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, fmt.Errorf("get member: %v", ErrNotFound)
+			return nil, fmt.Errorf("get member: %w", ErrNotFound)
 		}
 		return nil, fmt.Errorf("get member: %w", err)
 	}
