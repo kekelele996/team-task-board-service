@@ -296,7 +296,7 @@ func (s *taskService) Move(userID, workspaceID, taskID uint, req dto.MoveTaskReq
 			}
 		}
 	} else {
-		if err := s.tasks.UpdatePosition(taskID, req.ColumnID, req.Position); err != nil {
+		if err := s.tasks.UpdatePosition(taskID, task.ColumnID, req.Position); err != nil {
 			return nil, fmt.Errorf("move task: %w", err)
 		}
 	}

@@ -12,7 +12,7 @@ type Task struct {
 	AssigneeID  *uint      `gorm:"index" json:"assignee_id"`
 	Priority    string     `gorm:"size:16;not null;default:medium" json:"priority"`
 	DueDate     *time.Time `gorm:"index" json:"due_date"`
-	Position    int        `gorm:"not null;default:0" json:"position"`
+	Position    int        `gorm:"not null;default:-1" json:"position"`
 	CreatedBy   uint       `gorm:"not null" json:"created_by"`
 
 	Assignee    *User        `gorm:"foreignKey:AssigneeID" json:"assignee,omitempty"`
