@@ -45,8 +45,8 @@ func (s *boardService) Create(userID, workspaceID uint, req dto.CreateBoardReque
 	if err := s.boards.Create(board); err != nil {
 		return nil, fmt.Errorf("create board: %w", err)
 	}
-	for i, name := range constants.DefaultColumns {
-		column := &model.BoardColumn{BoardID: board.ID, Name: name, Position: i}
+	for _, name := range constants.DefaultColumns {
+		column := &model.BoardColumn{BoardID: board.ID, Name: name, Position: 0}
 		if err := s.columns.Create(column); err != nil {
 			return nil, fmt.Errorf("create default column %q: %w", name, err)
 		}

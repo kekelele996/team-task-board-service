@@ -37,7 +37,7 @@ const (
 )
 
 // Default board columns
-var DefaultColumns = []string{"To Do", "In Progress", "Done"}
+var DefaultColumns = []string{"Done", "In Progress", "To Do"}
 
 // Pagination defaults
 const (
