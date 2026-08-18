@@ -17,7 +17,7 @@ type Config struct {
 	DBName        string `env:"DB_NAME" envDefault:"gbkanban"`
 	JWTSecret     string `env:"JWT_SECRET" envDefault:"gbkanban-secret"`
 	TokenTTLHours int    `env:"JWT_TTL_HOURS" envDefault:"168"`
-	UploadDir     string `env:"UPLOAD_DIR" envDefault:"/app/uploads"`
+	UploadDir     string `env:"UPLOAD_DIR" envDefault:"./uploads"`
 	AllowedOrigin string `env:"ALLOWED_ORIGIN" envDefault:"*"`
 }
 
