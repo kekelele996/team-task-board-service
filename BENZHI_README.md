@@ -1,16 +1,25 @@
 # team-task-board-service
 
-## 标准命令
+## 本机验证
+
+```bash
+cp .env.example .env
+docker compose up --build db backend
+curl http://127.0.0.1:19503/healthz
+```
+
+也可以在已启动 MySQL 并正确设置 `DB_*` 环境变量后直接运行：
 
 ```bash
 cd backend
-go build ./...     # 编译
-go run ./cmd/server # 启动 HTTP 服务（默认 :8080）
-go test ./...      # 测试（如有）
+go build ./...
+go run ./cmd/server
 ```
 
-## 环境
+## 评测镜像
 
-- 基础镜像: golang:1.22
-- 依赖已在镜像构建阶段预下载，容器内离线可用。
-- 代码目录: /app/backend
+```bash
+docker build -f benzhi.Dockerfile -t team-task-board-service .
+```
+
+镜像会真实启动 `./cmd/server`；服务运行时需要可访问的 MySQL。完整本地依赖和健康检查请使用根目录 Compose。
