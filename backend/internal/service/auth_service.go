@@ -70,6 +70,9 @@ func (s *authService) Register(req dto.RegisterRequest) (*dto.TokenResponse, err
 func (s *authService) Login(req dto.LoginRequest) (*dto.TokenResponse, error) {
 	user, err := s.users.FindByEmail(req.Email)
 	if err != nil {
+		if errors.Is(err, repository.ErrNotFound) {
+			return nil, ErrInvalidCredentials
+		}
 		return nil, fmt.Errorf("login: find user: %w", err)
 	}
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.Password)); err != nil {
