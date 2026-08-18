@@ -4,8 +4,9 @@ WORKDIR /app/backend
 COPY backend/go.mod backend/go.sum ./
 RUN go mod download
 COPY backend/ .
-RUN go build ./...
-CMD ["bash"]
+RUN go build -o /app/backend/server ./cmd/server
+EXPOSE 8080
+CMD ["/app/backend/server"]
 
 # 多架构交叉构建示例（如需交付双架构镜像）：
 # docker buildx build --platform linux/arm64,linux/amd64 -f benzhi.Dockerfile -t <image> .
